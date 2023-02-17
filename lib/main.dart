@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:seed_yap/pages/goalset_page.dart';
 import 'package:seed_yap/pages/init_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'models/colors.dart';
 
 late SharedPreferences pref;
 
@@ -24,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'seedyap',
       theme: ThemeData(
-        scaffoldBackgroundColor: Background.bgc,
+        color: Color(#D9F1F3),
         fontFamily: 'Dong',
       ),
       home: InitPage(),
