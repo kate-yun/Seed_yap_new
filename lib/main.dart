@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
   final _goalTextController = TextEditingController(text: '');
 
   String _goal = '';
+  String? error;
 
   @override
   void initState() {
@@ -62,32 +63,46 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _drawPage(),
-        floatingActionButton: (FloatingActionButton(
-          onPressed: () {
+      body: _drawPage(),
+      floatingActionButton: (FloatingActionButton(
+        onPressed: () {
+          String goal = _goalTextController.text;
+          if (goal.isEmpty) {
             setState(() {
+              error = '3일동안 어떤 목표를 이루고 싶으신가요?';
+            });
+          } else {
+            setState(() {
+              error = null;
+
               _isGoalSet = true;
             });
-            _assetImage.evict();
-            // _goal = _goalTextController.value.text;
-            // Navigator.pushReplacement(
-            //   context,
-            //   MaterialPageRoute(builder: (_) => CreatePage()),
-            // );
-          },
-          // ignore: sort_child_properties_last
-          child: const Icon(
-            Icons.add_reaction,
-            color: IconColor.sprout,
-          ),
-          backgroundColor: IconColor.button,
-        )),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+          }
+
+          //_isGoalSet = true;
+          //});
+          _assetImage.evict();
+          // _goal = _goalTextController.value.text;
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(builder: (_) => CreatePage()),
+          // );
+        },
+        // ignore: sort_child_properties_last
+        child: Image.asset('lib/icons/IMG_0633.PNG'),
+      )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        shape: CircularNotchedRectangle(),
+        notchMargin: 5,
+        clipBehavior: Clip.antiAlias,
+        child: BottomNavigationBar(
+          elevation: 0,
           backgroundColor: Background.box,
-          selectedItemColor: IconColor.again,
+          selectedItemColor: Colors.green[500],
           unselectedItemColor: FontColor.bottomfont,
+          selectedFontSize: 18,
           currentIndex: _selectedIndex,
           onTap: (int index) {
             setState(() {
@@ -103,7 +118,9 @@ class _HomePageState extends State<HomePage> {
             const BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.calendar_today), label: '수확'),
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _drawPage() {
@@ -114,15 +131,22 @@ class _HomePageState extends State<HomePage> {
           _isGoalSet
               ? Row(
                   children: [
-                    ElevatedButton(
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ElevatedButton.icon(
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (_) => HomePage()),
                           );
                         },
-                        child: Text("reset")),
-                    Padding(padding: EdgeInsets.all(20)),
+                        icon: Icon(Icons.refresh),
+                        label: Text("재설정"),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green[400],
+                        ),
+                      ),
+                    ),
                   ],
                 )
               : Container(),
@@ -138,22 +162,26 @@ class _HomePageState extends State<HomePage> {
   Image _imageWidget() {
     if (!_isGoalSet) {
       _assetImage = AssetImage('assets/gif/00.gif');
-      return Image(image: _assetImage);
+      return Image(image: _assetImage, width: 300, height: 450);
     } else {
       return Image.asset(
-        'assets/image/create.png',
-        width: 280,
-        height: 340,
+        'assets/gif/01.gif',
+        width: 300,
+        height: 400,
       );
     }
   }
 
   Widget _textEditor() {
-    return TextField(
-      controller: _goalTextController,
-      readOnly: _isGoalSet,
-      decoration: InputDecoration(
-        hintText: '목표를 입력해 주세요',
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: TextField(
+        controller: _goalTextController,
+        readOnly: _isGoalSet,
+        decoration: InputDecoration(
+          hintText: '목표를 입력해 주세요!',
+          errorText: error,
+        ),
       ),
     );
   }
