@@ -1,5 +1,4 @@
-// ignore_for_file: unused_import
-
+// ignore_for_file: unused_import, depend_on_referenced_packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seed_yap/models/home.dart';

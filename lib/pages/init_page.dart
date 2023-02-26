@@ -1,11 +1,7 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seed_yap/models/home.dart';
 import 'package:seed_yap/service/goal_provider.dart';
-
-import '../main.dart';
 
 class InitPage extends StatefulWidget {
   const InitPage({super.key});
@@ -15,13 +11,12 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> {
-  Goal? _goal;
-
   @override
   void initState() {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     GoalService goalService = context.read<GoalService>(); //goalservice 불러오기
     goalService.checkIfGoalExists(); //  앱 실행시 목표 있는지 여부

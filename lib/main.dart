@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seed_yap/pages/goalset_page.dart';
+import 'package:seed_yap/config/colors.dart';
 import 'package:seed_yap/pages/init_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'seedyap',
       theme: ThemeData(
-        color: Color(#D9F1F3),
+        scaffoldBackgroundColor: Background.bgc,
         fontFamily: 'Dong',
       ),
       home: InitPage(),
