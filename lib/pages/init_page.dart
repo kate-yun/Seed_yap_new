@@ -23,7 +23,11 @@ class _InitPageState extends State<InitPage> {
 
     return Consumer<GoalService>(builder: (context, goalService, child) {
       Goal? goal = goalService.goal;
-      return goal == null ? Text('목표가 없을 떄') : Text("목표가 있을 때");
+      return Scaffold(
+        body: SafeArea(
+          child: goal == null ? Text('목표가 없을 떄') : Text("목표가 있을 때"),
+        ),
+      );
     });
   }
 }

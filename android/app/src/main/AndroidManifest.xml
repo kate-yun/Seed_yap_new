@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.seed_yap">
+    package="com.chang3.seed_yap.seed_yap">
    <application
         android:label="seed_yap"
         android:name="${applicationName}"
